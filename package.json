@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "build": "sudo apt-get install php-sqlite3 -y && cd app && touch database/database.sqlite && composer install",
-    "start": "cd app && php artisan migrate && php artisan serve",
+    "start": "cd app && php artisan migrate --force && php artisan serve",
     "test": "cypress run"
   },
   "devDependencies": {
