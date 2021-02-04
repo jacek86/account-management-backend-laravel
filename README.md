@@ -36,6 +36,17 @@ Your task is to build a backend service that implements this [API specification]
 1. Update the `apiUrl` (where your app will run) in [cypress.json](cypress.json).
 2. Update the [`build`](package.json#L5) and [`start`](package.json#L6) scripts in [package.json](package.json) that respectively build and run your application. **[See examples](https://www.notion.so/devskills/Backend-78f49bea524148228f29ceb446157474)**.
 
+### Notes from Jacek Zieliński (04.02.2021)
+* To build application run `sudo apt-get install php-sqlite3 -y && cd app && touch database/database.sqlite && composer install`.
+* To start application run `cd app && php artisan migrate && php artisan serve`.
+* Despite 3 hours is not a lot of time, but I managed to finish the basic functionality. This notes have been written after time passed though.
+* I created middleware called ValidateContentType. It checks if the content-type is json. Thanks to this we can re-use it in many routes.
+* For fetching account balance and particular transactions I decided to select only columns I need to increase performance and use ActiveRecord as it was convinient for casting.
+* The data are stored in two tables: accounts and transactions.
+* After transaction insert, the balance of related account is updated respectively. I used DB::transaction to ensure the ACID rule (Atomicity, Consistency, Isolation, Durability).
+* For getting max transactons I used custom SQL query as it is more efficient and only one query is needed
+* When transaction is created, validation rules are applied. This could be moved directy to the Transaction model if there was more time for the task.
+
 ---
 
 Made by [DevSkills](https://devskills.co). 
